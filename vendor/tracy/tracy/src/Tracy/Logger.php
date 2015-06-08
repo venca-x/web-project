@@ -23,6 +23,9 @@ class Logger implements ILogger
 	/** @var string|array email or emails to which send error notifications */
 	public $email;
 
+	/** @var string sender of email notifications */
+	public $fromEmail;
+
 	/** @var mixed interval for sending email is 2 days */
 	public $emailSnooze = '2 days';
 
@@ -157,7 +160,7 @@ class Logger implements ILogger
 	{
 		$snooze = is_numeric($this->emailSnooze)
 			? $this->emailSnooze
-			: strtotime($this->emailSnooze) - time();
+			: @strtotime($this->emailSnooze) - time(); // @ - timezone may not be set
 
 		if ($this->email && $this->mailer
 			&& @filemtime($this->directory . '/email-sent') + $snooze < time() // @ - file may not exist
@@ -183,7 +186,7 @@ class Logger implements ILogger
 			array("\n", PHP_EOL),
 			array(
 				'headers' => implode("\n", array(
-					"From: noreply@$host",
+					"From: " . ($this->fromEmail ?: "noreply@$host"),
 					'X-Mailer: Tracy',
 					'Content-Type: text/plain; charset=UTF-8',
 					'Content-Transfer-Encoding: 8bit',
