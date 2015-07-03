@@ -12,8 +12,6 @@ use Nette;
 
 /**
  * Sends emails via the SMTP server.
- *
- * @author     David Grudl
  */
 class SmtpMailer extends Nette\Object implements IMailer
 {
@@ -65,6 +63,7 @@ class SmtpMailer extends Nette\Object implements IMailer
 	/**
 	 * Sends email.
 	 * @return void
+	 * @throws SmtpException
 	 */
 	public function send(Message $mail)
 	{
@@ -193,14 +192,4 @@ class SmtpMailer extends Nette\Object implements IMailer
 		return $s;
 	}
 
-}
-
-
-/**
- * SMTP mailer exception.
- *
- * @author     David Grudl
- */
-class SmtpException extends \Exception
-{
 }
