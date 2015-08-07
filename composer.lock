@@ -927,7 +927,7 @@
         },
         {
             "name": "nette/utils",
-            "version": "2.3.3",
+            "version": "v2.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/utils.git",
