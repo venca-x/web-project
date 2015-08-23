@@ -21,7 +21,7 @@ class Parameter extends Nette\Object
 	/** @var bool */
 	private $reference = FALSE;
 
-	/** @var string */
+	/** @var string|NULL */
 	private $typeHint;
 
 	/** @var bool */
@@ -39,19 +39,25 @@ class Parameter extends Nette\Object
 		$param = new static;
 		$param->name = $from->getName();
 		$param->reference = $from->isPassedByReference();
-		try {
-			$param->typeHint = $from->isArray() ? 'array' : ($from->getClass() ? '\\' . $from->getClass()->getName() : '');
-		} catch (\ReflectionException $e) {
-			if (preg_match('#Class (.+) does not exist#', $e->getMessage(), $m)) {
-				$param->typeHint = '\\' . $m[1];
-			} else {
-				throw $e;
+		if ($from->isArray()) {
+			$param->typeHint = 'array';
+		} elseif (PHP_VERSION_ID >= 50400 && $from->isCallable()) {
+			$param->typeHint = 'callable';
+		} else {
+			try {
+				$param->typeHint = $from->getClass() ? '\\' . $from->getClass()->getName() : NULL;
+			} catch (\ReflectionException $e) {
+				if (preg_match('#Class (.+) does not exist#', $e->getMessage(), $m)) {
+					$param->typeHint = '\\' . $m[1];
+				} else {
+					throw $e;
+				}
 			}
 		}
 		$param->optional = PHP_VERSION_ID < 50407 ? $from->isOptional() || ($param->typeHint && $from->allowsNull()) : $from->isDefaultValueAvailable();
 		$param->defaultValue = (PHP_VERSION_ID === 50316 ? $from->isOptional() : $from->isDefaultValueAvailable()) ? $from->getDefaultValue() : NULL;
 
-		$namespace = $from->getDeclaringClass()->getNamespaceName();
+		$namespace = $from->getDeclaringClass() ? $from->getDeclaringClass()->getNamespaceName() : NULL;
 		$namespace = $namespace ? "\\$namespace\\" : '\\';
 		if (Nette\Utils\Strings::startsWith($param->typeHint, $namespace)) {
 			$param->typeHint = substr($param->typeHint, strlen($namespace));
@@ -101,18 +107,18 @@ class Parameter extends Nette\Object
 
 
 	/**
-	 * @param  string
+	 * @param  string|NULL
 	 * @return self
 	 */
 	public function setTypeHint($hint)
 	{
-		$this->typeHint = (string) $hint;
+		$this->typeHint = $hint ? (string) $hint : NULL;
 		return $this;
 	}
 
 
 	/**
-	 * @return string
+	 * @return string|NULL
 	 */
 	public function getTypeHint()
 	{

@@ -240,6 +240,26 @@ class Selection extends Nette\Object implements \Iterator, IRowContainer, \Array
 
 
 	/**
+	 * Fetches single field.
+	 * @param  string|NULL
+	 * @return mixed|FALSE
+	 */
+	public function fetchField($column = NULL)
+	{
+		if ($column) {
+			$this->select($column);
+		}
+
+		$row = $this->fetch();
+		if ($row) {
+			return $column ? $row[$column] : array_values($row->toArray())[0];
+		}
+
+		return FALSE;
+	}
+
+
+	/**
 	 * @inheritDoc
 	 */
 	public function fetchPairs($key = NULL, $value = NULL)
@@ -554,6 +574,7 @@ class Selection extends Nette\Object implements \Iterator, IRowContainer, \Array
 		$this->specificCacheKey = NULL;
 		$this->generalCacheKey = NULL;
 		$this->refCache['referencingPrototype'] = array();
+		$this->refCache['referenced'] = array();
 	}
 
 
