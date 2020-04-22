@@ -1,1 +1,12 @@
-app/config/local.neon
+/.idea
+/.sass-cache
+/node_modules
+/src/css/tmp
+/src/js/tmp
+/vendor
+/www/css
+/www/js
+/www/fonts
+/deployment/deployment-prod.log
+/deployment/deployment-test.log
+/temp/cache

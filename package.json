@@ -1,0 +1,37 @@
+{
+  "name": "web-project",
+  "version": "1.0.0",
+  "description": "Nette Web Project\r =================",
+  "main": "gulpfile.js",
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.9.0",
+    "bootstrap": "^4.3.1",
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.2.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-concat-css": "^3.1.0",
+    "gulp-copy": "^4.0.1",
+    "gulp-sass": "^4.0.2",
+    "gulp-shell": "^0.7.1",
+    "gulp-uglify": "^3.0.2",
+    "gulp-uglify-es": "^1.0.4",
+    "install": "^0.13.0",
+    "jquery": "^3.4.1",
+    "naja": "^1.6.0",
+    "npm": "^6.10.1",
+    "popper.js": "^1.15.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/venca-x/web-project.git"
+  },
+  "author": "vEnCa-X",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/venca-x/web-project/issues"
+  },
+  "homepage": "https://github.com/venca-x/web-project#readme"
+}

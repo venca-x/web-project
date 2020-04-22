@@ -1,11 +1,23 @@
 parameters:
-
+	database:
+		driver: mysql
+		host: 127.0.0.1
+		dbname: demo
+		user: root
+		password: ''
 
 application:
 	errorPresenter: Error
 	mapping:
 		*: [App, Modules\*, Presenters\*Presenter]
 
+#tracy:
+#   email: vencax@gmail.com
+
+database:
+	dsn: '%database.driver%:host=%database.host%;dbname=%database.dbname%'
+	user: %database.user%
+	password: %database.password%
 
 session:
 	expiration: 14 days
@@ -13,3 +25,9 @@ session:
 
 services:
 	router: App\Router\RouterFactory::createRouter
+	- App\Modules\Admin\Forms\FormFactory
+	- App\Modules\Admin\Forms\SignInFormFactory
+	- App\Model\Authenticator
+	- App\Model\User
+	- App\Modules\Front\Forms\FormFactory
+	- App\Modules\Front\Forms\NewsletterFormFactory

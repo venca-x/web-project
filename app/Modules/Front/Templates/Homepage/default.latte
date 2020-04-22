@@ -1,0 +1,29 @@
+{block content}
+<div class="container">
+	<div class="row">
+		<div class="col-12">
+			<h1 n:block=title>Congratulations! <i class="fas fa-wine-bottle"></i></h1>
+			<a href="https://www.venca-x.cz/">vEnCa-X</a>
+		</div>
+		<div class="col-12">
+			<hr/>
+			{snippet dateTimeSnippet}
+				{$dateTime|date:'j. n. Y H:i:s'}
+			{/snippet}
+			<a n:href="actualiseDateTime!" class="ajax">AKTUALIZOVAT</a>
+		</div>
+
+		<div class="col-12">
+			<hr/>
+			{snippet newsletterSnippet}
+				{if $newsletterFormSubmitted}
+					<div class="alert alert-success" role="alert">
+						<strong>Děkujeme</strong> za Váš email
+					</div>
+				{else}
+					{control newsletterForm}
+				{/if}
+			{/snippet}
+		</div>
+	</div>
+</div>

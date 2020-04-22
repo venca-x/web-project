@@ -13,7 +13,10 @@ class Bootstrap
 	{
 		$configurator = new Configurator;
 
-		//$configurator->setDebugMode('23.75.345.200'); // enable for your remote IP
+		$secret = 'fgdfgfghghhfdsdfghfgx';//set random chars
+		$configurator->setDebugMode([$secret . '@23.75.345.200']); // enable for your remote IP
+		//setcookie('nette-debug', $secret, strtotime('1 years'));
+
 		$configurator->enableTracy(__DIR__ . '/../log');
 
 		$configurator->setTimeZone('Europe/Prague');
@@ -26,6 +29,14 @@ class Bootstrap
 		$configurator->addConfig(__DIR__ . '/config/common.neon');
 		$configurator->addConfig(__DIR__ . '/config/local.neon');
 
+		return $configurator;
+	}
+
+
+	public static function bootForTests(): Configurator
+	{
+		$configurator = self::boot();
+		\Tester\Environment::setup();
 		return $configurator;
 	}
 }

@@ -1,0 +1,13 @@
+.wrapper #sidebar {
+  .nav {
+    .nav-item {
+      .nav-link {
+        &.active {
+          font-weight: bold;
+          color: white;
+          background: $adminBackground;
+        }
+      }
+    }
+  }
+}
