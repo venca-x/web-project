@@ -61,7 +61,7 @@ class Authenticator implements Nette\Security\IAuthenticator
 	private function createIdentity($userRow)
 	{
 		$userArray = $userRow->toArray();
-		unset($userArray['password']);//remove password from identity
+		unset($userArray['password']); //remove password from identity
 		return new Security\Identity($userRow->id, $userRow->role, $userArray);
 	}
 

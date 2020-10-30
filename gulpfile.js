@@ -15,8 +15,8 @@ gulp.task('shell_deploy_prod', shell.task('cd deployment & deployment-prod.bat')
 gulp.task('shell_deploy_test', shell.task('cd deployment & deployment-test.bat'));
 gulp.task('shell_netteCodeChecker', shell.task('php ..\\nette-code-checker\\code-checker -d app --short-arrays --strict-types'));
 gulp.task('shell_netteCodeCheckerFIX', shell.task('php ..\\nette-code-checker\\code-checker -d app --short-arrays --strict-types --fix'));
-gulp.task('shell_netteCodingStandard', shell.task('php ..\\nette-coding-standard\\ecs check app tests --config ..\\nette-coding-standard\\coding-standard-php71.yml'));
-gulp.task('shell_netteCodingStandardFIX', shell.task('php ..\\nette-coding-standard\\ecs check app tests --config ..\\nette-coding-standard\\coding-standard-php71.yml --fix'));
+gulp.task('shell_netteCodingStandard', shell.task('php ..\\nette-coding-standard\\ecs check app tests --preset php71'));
+gulp.task('shell_netteCodingStandardFIX', shell.task('php ..\\nette-coding-standard\\ecs check app tests --preset php71 --fix'));
 
 gulp.task('sass', done => {
     gulp.src(['src/scss-admin/fontawesome.scss'])

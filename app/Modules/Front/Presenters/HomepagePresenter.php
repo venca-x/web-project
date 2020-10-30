@@ -29,7 +29,7 @@ class HomepagePresenter extends BasePresenter
 
 	public function handleActualiseDateTime()
 	{
-		$this->dateTime = new DateTime();
+		$this->dateTime = new DateTime;
 		if ($this->isAjax()) {
 			$this->redrawControl('dateTimeSnippet');
 		}
@@ -39,7 +39,7 @@ class HomepagePresenter extends BasePresenter
 	public function renderDefault(): void
 	{
 		if ($this->dateTime === null) {
-			$this->dateTime = new DateTime();
+			$this->dateTime = new DateTime;
 		}
 		$this->template->dateTime = $this->dateTime;
 		$this->template->newsletterFormSubmitted = $this->newsletterFormSubmitted;

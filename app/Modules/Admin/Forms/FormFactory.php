@@ -16,7 +16,7 @@ final class FormFactory
 	public function create(): Form
 	{
 		$form = new Form;
-		$form->setRenderer(new VencaX\NetteFormRenderer\BootstrapRendererV4());
+		$form->setRenderer(new VencaX\NetteFormRenderer\BootstrapRendererV4);
 		return $form;
 	}
 }

@@ -13,7 +13,7 @@ class Bootstrap
 	{
 		$configurator = new Configurator;
 
-		$secret = 'fgdfgfghghhfdsdfghfgx';//set random chars
+		$secret = 'fgdfgfghghhfdsdfghfgx'; //set random chars
 		$configurator->setDebugMode([$secret . '@23.75.345.200']); // enable for your remote IP
 		//setcookie('nette-debug', $secret, strtotime('1 years'));
 

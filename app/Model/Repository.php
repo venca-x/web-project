@@ -29,7 +29,7 @@ abstract class Repository
 		$this->dbContext = $dbContext;
 
 		if ($this->tableName === null) {
-			$class = get_class($this);
+			$class = static::class;
 
 			throw new Nette\InvalidStateException("Table name must be defined in $class::\$tableName.");
 		}
@@ -89,7 +89,7 @@ abstract class Repository
 	/**
 	 * To samé jako findBy akorát vrací vždy jen jeden záznam
 	 * @param array $by
-	 * @return \Nette\Database\Table\ActiveRow|FALSE
+	 * @return \Nette\Database\Table\ActiveRow|false
 	 */
 	public function findOneBy(array $by)
 	{
@@ -100,7 +100,7 @@ abstract class Repository
 	/**
 	 * Vrací záznam s daným primárním klíčem
 	 * @param int $id
-	 * @return \Nette\Database\Table\ActiveRow|FALSE
+	 * @return \Nette\Database\Table\ActiveRow|false
 	 */
 	public function find($id)
 	{
