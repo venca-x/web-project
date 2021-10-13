@@ -29,7 +29,7 @@ final class NewsletterFormFactory
 		$form->addEmail('email', 'E-mail:')
 			->setRequired('Please enter your e-mail');
 
-		$form->addSubmit('send', 'Submit');
+		$form->addSubmit('send', 'Submit')->setHtmlAttribute('class', 'btn btn-primary');
 
 		$form->onSuccess[] = function (Form $form, \stdClass $values) use ($onSuccess): void {
 			$onSuccess();
