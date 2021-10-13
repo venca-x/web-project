@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 var concat = require('gulp-concat');
-var sass = require('gulp-sass');
+var sass = require('gulp-sass')(require('sass'));
 var concatCss = require('gulp-concat-css');
 var uglify = require('gulp-uglify-es').default;
 var cleanCSS = require('gulp-clean-css');
