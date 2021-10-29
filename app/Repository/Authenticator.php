@@ -2,28 +2,27 @@
 
 declare(strict_types=1);
 
-namespace App\Model;
+namespace App\Repository;
 
 use App;
-use App\Model;
+use App\Repository;
 use Nette;
 use Nette\Security;
+use Nette\Security\IIdentity;
+
 
 /**
  * Users authenticator
  */
-class Authenticator implements Nette\Security\IAuthenticator
+class Authenticator implements Nette\Security\Authenticator
 {
 	use Nette\SmartObject;
 
-	/** @var Model\User */
+	/** @var Repository\User */
 	private $userRepository;
 
 
-	/**
-	 * @param Nette\DI\Container $context
-	 */
-	public function __construct(App\Model\User $userRepository)
+	public function __construct(App\Repository\User $userRepository)
 	{
 		$this->userRepository = $userRepository;
 	}
@@ -31,15 +30,15 @@ class Authenticator implements Nette\Security\IAuthenticator
 
 	/**
 	 * Performs an authentication
-	 * @param array $credentials
-	 * @return Security\IIdentity
+	 * @param string $user email
+	 * @param string $password
+	 * @return IIdentity
+
 	 * @throws Security\AuthenticationException
 	 */
-	public function authenticate(array $credentials): Nette\Security\IIdentity
+	public function authenticate(string $user, string $password): IIdentity
 	{
-		[$email, $password] = $credentials;
-		//search user by email
-		$row = $this->userRepository->findByEmail($email);
+		$row = $this->userRepository->findByEmail($user);
 
 		if (!$row) {
 			throw new Security\AuthenticationException('Uživatel nenalezen', self::IDENTITY_NOT_FOUND);
@@ -50,28 +49,30 @@ class Authenticator implements Nette\Security\IAuthenticator
 		} else {
 			throw new Security\AuthenticationException('Špatné heslo', self::INVALID_CREDENTIAL);
 		}
+
+		return $this->createIdentity($row);
 	}
 
 
 	/**
 	 * Create user identity
-	 * @param \Nette\Database\Table\ActiveRow $userRow
-	 * @return \Nette\Security\Identity
+	 * @param Nette\Database\Table\ActiveRow $userRow
+	 * @return Nette\Security\Identity
 	 */
 	private function createIdentity($userRow)
 	{
 		$userArray = $userRow->toArray();
 		unset($userArray['password']); //remove password from identity
-		return new Security\Identity($userRow->id, $userRow->role, $userArray);
+		return new Security\SimpleIdentity($userRow->id, [$userRow->role], $userArray);
 	}
 
 
 	/**
 	 * Computes salted password hash.
-	 * @param  string
+	 * @param string
 	 * @return string
 	 */
-	public function calculateHash($password)
+	public static function calculateHash($password)
 	{
 		return password_hash($password, PASSWORD_DEFAULT);
 	}

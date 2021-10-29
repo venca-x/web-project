@@ -2,7 +2,7 @@ services:
 	- App\Router\RouterFactory::createRouter
 	- App\Modules\Admin\Forms\FormFactory
 	- App\Modules\Admin\Forms\SignInFormFactory
-	- App\Model\Authenticator
-	- App\Model\User
 	- App\Modules\Front\Forms\FormFactory
 	- App\Modules\Front\Forms\NewsletterFormFactory
+	- App\Repository\Authenticator
+	- App\Repository\User
