@@ -44,9 +44,7 @@ class Authenticator implements Nette\Security\Authenticator
 			throw new Security\AuthenticationException('Uživatel nenalezen', self::IDENTITY_NOT_FOUND);
 		}
 
-		if (password_verify($password, $row->password)) {
-			return $this->createIdentity($row);
-		} else {
+		if (!password_verify($password, $row->password)) {
 			throw new Security\AuthenticationException('Špatné heslo', self::INVALID_CREDENTIAL);
 		}
 
@@ -59,7 +57,7 @@ class Authenticator implements Nette\Security\Authenticator
 	 * @param Nette\Database\Table\ActiveRow $userRow
 	 * @return Nette\Security\Identity
 	 */
-	private function createIdentity($userRow)
+	private function createIdentity($userRow): IIdentity
 	{
 		$userArray = $userRow->toArray();
 		unset($userArray['password']); //remove password from identity
@@ -68,9 +66,9 @@ class Authenticator implements Nette\Security\Authenticator
 
 
 	/**
-	 * Computes salted password hash.
-	 * @param string
-	 * @return string
+	 * Computes salted password hash
+	 * @param string $password
+	 * @return false|string|null
 	 */
 	public static function calculateHash($password)
 	{

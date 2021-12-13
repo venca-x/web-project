@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use Nette;
+use Nette\Database\Table\ActiveRow;
+use Nette\Database\Table\Selection;
 
 /**
  * Provadi operace nad databazovou tabulkou
@@ -16,17 +18,17 @@ abstract class Repository
 	/** @var string */
 	protected $tableName;
 
-	/** @var Nette\Database\Context */
-	private $dbContext;
+	/** @var Nette\Database\Explorer */
+	private $dbExplorer;
 
 
 	/**
-	 * @param Nette\Database\Context $sf
-	 * @throws \Nette\InvalidStateException
+	 * @param Nette\Database\Explorer $dbExplorer
+	 * @throws Nette\InvalidStateException
 	 */
-	public function __construct(Nette\Database\Context $dbContext)
+	public function __construct(Nette\Database\Explorer $dbExplorer)
 	{
-		$this->dbContext = $dbContext;
+		$this->dbExplorer = $dbExplorer;
 
 		if ($this->tableName === null) {
 			$class = static::class;
@@ -42,31 +44,31 @@ abstract class Repository
 	 * @param string $sStmt - statemant
 	 * @return Nette\Database\ResultSet
 	 */
-	protected function query($sStmt)
+	protected function query($sStmt): mixed
 	{
-		return call_user_func_array([$this->dbContext->getConnection(), 'query'], func_get_args());
+		return call_user_func_array([$this->dbExplorer->getConnection(), 'query'], func_get_args());
 	}
 
 
-	protected function queryFetch()
+	protected function queryFetch(): mixed
 	{
-		return call_user_func_array([$this->dbContext->getConnection(), 'fetch'], func_get_args());
+		return call_user_func_array([$this->dbExplorer->getConnection(), 'fetch'], func_get_args());
 	}
 
 
 	/**
 	 * Vraci celou tabulku z databaze
-	 * @return \Nette\Database\Table\Selection
+	 * @return Nette\Database\Table\Selection
 	 */
 	public function getTable()
 	{
-		return $this->dbContext->table($this->tableName);
+		return $this->dbExplorer->table($this->tableName);
 	}
 
 
 	/**
 	 * Vraci vsechny zaznamy v tabulce
-	 * @return \Nette\Database\Table\Selection
+	 * @return Nette\Database\Table\Selection
 	 */
 	public function findAll()
 	{
@@ -77,10 +79,10 @@ abstract class Repository
 	/**
 	 * Vrací vyfiltrované záznamy na základě vstupního pole
 	 * (pole array('name' => 'David') se převede na část SQL dotazu WHERE name = 'David')
-	 * @param array $by
-	 * @return \Nette\Database\Table\Selection
+	 * @param array<string, mixed> $by
+	 * @return Nette\Database\Table\Selection
 	 */
-	public function findBy(array $by)
+	public function findBy(array $by): Nette\Database\Table\Selection
 	{
 		return $this->getTable()->where($by);
 	}
@@ -88,8 +90,8 @@ abstract class Repository
 
 	/**
 	 * To samé jako findBy akorát vrací vždy jen jeden záznam
-	 * @param array $by
-	 * @return \Nette\Database\Table\ActiveRow|false
+	 * @param array<string, mixed> $by
+	 * @return Nette\Database\Table\ActiveRow|false
 	 */
 	public function findOneBy(array $by)
 	{
@@ -100,7 +102,7 @@ abstract class Repository
 	/**
 	 * Vrací záznam s daným primárním klíčem
 	 * @param int $id
-	 * @return \Nette\Database\Table\ActiveRow|false
+	 * @return Nette\Database\Table\ActiveRow|false
 	 */
 	public function find($id)
 	{
@@ -109,23 +111,23 @@ abstract class Repository
 
 
 	/**
-	 * Pridani zaznamu
-	 * @param type $aValues
-	 * @return int id záznamu
+	 * Inserts row in a table.
+	 * @param array<string, mixed>|\Traversable<string, mixed>|Selection $data [$column => $value]|\Traversable|Selection for INSERT ... SELECT
+	 * @return ActiveRow|int|bool Returns ActiveRow or number of affected rows for Selection or table without primary key
 	 */
-	public function insert($aValues)
+	public function insert(iterable $data)
 	{
-		return $this->getTable()->insert($aValues);
+		return $this->getTable()->insert($data);
 	}
 
 
 	/**
 	 * Start transaction
 	 */
-	public function beginTransaction()
+	public function beginTransaction(): void
 	{
 		if ($this->inTransaction() == false) {
-			$this->dbContext->getConnection()->getPdo()->beginTransaction();
+			$this->dbExplorer->getConnection()->getPdo()->beginTransaction();
 		}
 	}
 
@@ -133,10 +135,10 @@ abstract class Repository
 	/**
 	 * Commit transaction
 	 */
-	public function commit()
+	public function commit(): void
 	{
 		if ($this->inTransaction()) {
-			$this->dbContext->getConnection()->getPdo()->commit();
+			$this->dbExplorer->getConnection()->getPdo()->commit();
 		}
 	}
 
@@ -144,10 +146,10 @@ abstract class Repository
 	/**
 	 * RollBack transaction
 	 */
-	public function rollBack()
+	public function rollBack(): void
 	{
 		if ($this->inTransaction()) {
-			$this->dbContext->getConnection()->getPdo()->rollBack();
+			$this->dbExplorer->getConnection()->getPdo()->rollBack();
 		}
 	}
 
@@ -155,8 +157,8 @@ abstract class Repository
 	/**
 	 * Is in transaction
 	 */
-	public function inTransaction()
+	public function inTransaction(): bool
 	{
-		return $this->dbContext->getConnection()->getPdo()->inTransaction();
+		return $this->dbExplorer->getConnection()->getPdo()->inTransaction();
 	}
 }

@@ -14,8 +14,8 @@ class User extends Repository
 
 	/**
 	 * Search user by email
-	 * @param $email
-	 * @return Nette\Database\IRow|Nette\Database\Table\ActiveRow|null
+	 * @param string $email
+	 * @return Nette\Database\Table\ActiveRow|null
 	 */
 	public function findByEmail($email)
 	{
@@ -25,13 +25,12 @@ class User extends Repository
 
 	/**
 	 * Is email unique? Unique from logged user (loged email can be same as chnaged)
-	 * @param $nick
-	 * @param $userId ID logged user
+	 * @param string $nick
+	 * @param int $userId logged userId
 	 * @return bool
 	 */
 	public function isEmailUnique($nick, $userId)
 	{
-		$count = $this->findAll()->where('nick = ? AND id != ?', $nick, $userId)->count('*');
-		return $count == 0;
+		return $this->findAll()->where('nick = ? AND id != ?', $nick, $userId)->count('*') == 0;
 	}
 }
