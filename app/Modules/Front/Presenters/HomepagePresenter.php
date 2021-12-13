@@ -10,7 +10,10 @@ use Nette\Utils\DateTime;
 
 class HomepagePresenter extends BasePresenter
 {
+	/** @var DateTime */
 	private $dateTime;
+
+	/** @var bool */
 	private $newsletterFormSubmitted = false;
 
 	/** @var Forms\NewsletterFormFactory */
@@ -27,7 +30,7 @@ class HomepagePresenter extends BasePresenter
 	}
 
 
-	public function handleActualiseDateTime()
+	public function handleActualiseDateTime(): void
 	{
 		$this->dateTime = new DateTime;
 		if ($this->isAjax()) {

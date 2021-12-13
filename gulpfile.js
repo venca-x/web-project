@@ -17,6 +17,7 @@ gulp.task('shell_netteCodeChecker', shell.task('php ..\\nette-code-checker\\code
 gulp.task('shell_netteCodeCheckerFIX', shell.task('php ..\\nette-code-checker\\code-checker -d app --short-arrays --strict-types --fix'));
 gulp.task('shell_netteCodingStandard', shell.task('php ..\\nette-coding-standard\\ecs check app tests --preset php71'));
 gulp.task('shell_netteCodingStandardFIX', shell.task('php ..\\nette-coding-standard\\ecs check app tests --preset php71 --fix'));
+gulp.task('shell_phpstan', shell.task('c:\\www\\phpstan-nette\\vendor\\bin\\phpstan.bat analyse app tests --level=6 --memory-limit=4000M'));
 
 gulp.task('sass', done => {
     gulp.src(['src/scss-admin/fontawesome.scss'])
