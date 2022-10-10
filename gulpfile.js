@@ -25,6 +25,16 @@ gulp.task('sass', done => {
         .pipe(concat('fontawesome.css'))
         .pipe(gulp.dest('src/css/tmp'));
 
+    gulp.src(['src/scss-admin/fontawesome-brands.scss'])
+        .pipe(sass({includePaths: ['./node_modules/@fortawesome/fontawesome-free/scss']}))
+        .pipe(concat('fontawesome-brands.css'))
+        .pipe(gulp.dest('src/css/tmp'));
+
+    gulp.src(['src/scss-admin/fontawesome-solid.scss'])
+        .pipe(sass({includePaths: ['./node_modules/@fortawesome/fontawesome-free/scss']}))
+        .pipe(concat('fontawesome-solid.css'))
+        .pipe(gulp.dest('src/css/tmp'));
+
     gulp.src(['src/scss/main.scss'])
         .pipe(sass({
             includePaths: ['./node_modules/bootstrap/scss',
