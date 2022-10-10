@@ -26,13 +26,27 @@ gulp.task('sass', done => {
         .pipe(gulp.dest('src/css/tmp'));
 
     gulp.src(['src/scss/main.scss'])
-        .pipe(sass({includePaths: ['./node_modules/bootstrap/scss', './node_modules/bootstrap/scss/mixins']}))
+        .pipe(sass({
+            includePaths: ['./node_modules/bootstrap/scss',
+                './node_modules/bootstrap/scss/forms',
+                './node_modules/bootstrap/scss/helpers',
+                './node_modules/bootstrap/scss/mixins',
+                './node_modules/bootstrap/scss/utilities',
+                './node_modules/bootstrap/scss/vendor']
+        }))
         .pipe(cleanCSS())
         .pipe(concat('main.min.css'))
         .pipe(gulp.dest('www/css'));
 
     gulp.src(['src/scss-admin/main.scss'])
-        .pipe(sass({includePaths: ['./node_modules/bootstrap/scss', './node_modules/bootstrap/scss/mixins']}))
+        .pipe(sass({
+            includePaths: ['./node_modules/bootstrap/scss',
+                './node_modules/bootstrap/scss/forms',
+                './node_modules/bootstrap/scss/helpers',
+                './node_modules/bootstrap/scss/mixins',
+                './node_modules/bootstrap/scss/utilities',
+                './node_modules/bootstrap/scss/vendor']
+        }))
         .pipe(cleanCSS())
         .pipe(concat('admin.min.css'))
         .pipe(gulp.dest('www/css'));
