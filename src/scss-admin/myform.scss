@@ -1,0 +1,10 @@
+form {
+  ul.error {
+    list-style-type: none;
+    margin: 0;
+    padding: 10px;
+    margin-bottom: 20px;
+
+    @include alert-variant(shift-color($danger, $alert-bg-scale), shift-color($danger, $alert-border-scale), shift-color($danger, $alert-color-scale));
+  }
+}

@@ -1,11 +1,22 @@
+@import "mixins/banner";
+@include bsBanner("");
+
+
+// scss-docs-start import-stack
+// Configuration
 @import "functions";
 @import "variables";
+@import 'modules/variables'; // Rewrite Bootstrap variables or set your own
+@import "maps";
 @import "mixins";
+@import "utilities";
+
+// Layout & components
 @import "root";
 @import "reboot";
 @import "type";
 @import "images";
-@import "code";
+@import "containers";
 @import "grid";
 @import "tables";
 @import "forms";
@@ -13,29 +24,34 @@
 @import "transitions";
 @import "dropdown";
 @import "button-group";
-@import "input-group";
-@import "custom-forms";
 @import "nav";
 @import "navbar";
 @import "card";
+@import "accordion";
 @import "breadcrumb";
 @import "pagination";
 @import "badge";
-@import "jumbotron";
 @import "alert";
 @import "progress";
-@import "media";
 @import "list-group";
 @import "close";
+@import "toasts";
 @import "modal";
 @import "tooltip";
 @import "popover";
 @import "carousel";
-@import "utilities";
-@import "print";
+@import "spinners";
+@import "offcanvas";
+@import "placeholders";
 
-// Custom modules
-@import 'modules/variables'; // Rewrite Bootstrap variables or set your own
+// Helpers
+@import "helpers";
+
+// Utilities
+@import "utilities/api";
+// scss-docs-end import-stack
+
+
 @import 'modules/common';
 
 // Responsive modules
@@ -46,11 +62,10 @@
 @import 'modules/responsive-xl';
 
 //vendor
-@import 'form';
+@import 'myform';
 @import 'login';
 @import 'template';
 
 @import '../css/tmp/fontawesome.css';
 //@import 'vendor/...';
 //@import 'vendor/file.css';
-
