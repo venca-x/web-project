@@ -71,7 +71,7 @@ gulp.task('jsMain', done => {
             'node_modules/bootstrap/dist/js/bootstrap.min.js',
             'node_modules/tether/dist/js/tether.min.js',
             'node_modules/naja/dist/Naja.js',
-            'venor/nette/forms/src/assets/netteForms.min.js',
+            'vendor/nette/forms/src/assets/netteForms.min.js',
             'src/js/main.js'], {allowEmpty: true})
         .pipe(uglify({
             mangle: false,//disable rename variables and functions
@@ -87,7 +87,7 @@ gulp.task('jsAdmin', done => {
         'node_modules/popper.js/dist/umd/popper.min.js',
         'node_modules/bootstrap/dist/js/bootstrap.min.js',
         'node_modules/tether/dist/js/tether.min.js',
-        'venor/nette/forms/src/assets/netteForms.min.js',
+        'vendor/nette/forms/src/assets/netteForms.min.js',
         'src/js/admin.js'], {allowEmpty: true})
         .pipe(uglify({
             mangle: false,//disable rename variables and functions
