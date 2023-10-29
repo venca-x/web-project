@@ -101,7 +101,7 @@ gulp.task('jsAdmin', done => {
 gulp.task('copy', done => {
     //font awesome
     gulp.src('node_modules/@fortawesome/fontawesome-free/webfonts/*')
-        .pipe(gulp.dest('www/fonts'));
+        .pipe(gulp.dest('www/webfonts'));
 
     done();
 });

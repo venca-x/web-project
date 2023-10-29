@@ -5,6 +5,12 @@ form {
     padding: 10px;
     margin-bottom: 20px;
 
-    @include alert-variant(shift-color($danger, $alert-bg-scale), shift-color($danger, $alert-border-scale), shift-color($danger, $alert-color-scale));
+    position: relative;
+    padding: var(--#{$prefix}alert-padding-y) var(--#{$prefix}alert-padding-x);
+    margin-bottom: var(--#{$prefix}alert-margin-bottom);
+    color: var(--#{$prefix}alert-color);
+    background-color: var(--#{$prefix}alert-bg);
+    border: var(--#{$prefix}alert-border);
+    @include border-radius(var(--#{$prefix}alert-border-radius));
   }
 }

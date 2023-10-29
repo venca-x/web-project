@@ -14,7 +14,7 @@ If you like Nette, **[please make a donation now](https://nette.org/donate)**. T
 Requirements
 ------------
 
-- Web Project for Nette 3.0 requires PHP 7.1
+- Web Project for Nette 3.0 requires at least PHP 8.0
 
 
 Installation
@@ -69,13 +69,14 @@ Used technologies
 * npm
 * nette/tester
 * Sass
-* Bootstrap v4
+* Bootstrap v5
 * FontAwesome
 * Jquery
 * Minifi CSS and JS
 * nette-form-renderer
 * ftp-deployment
 * [Naja](https://github.com/jiripudil/Naja) (JS client-side AJAX library)
+
 ### Basic commain in Grunt
 **deploy-prod**
 Deploy files to prod server

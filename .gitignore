@@ -6,7 +6,7 @@
 /vendor
 /www/css
 /www/js
-/www/fonts
+/www/webfonts
 /deployment/deployment-prod.log
 /deployment/deployment-test.log
 /temp/cache
