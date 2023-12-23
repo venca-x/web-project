@@ -1,13 +1,13 @@
 @import "mixins/banner";
 @include bsBanner("");
 
+@import 'modules/variables'; // Rewrite Bootstrap variables or set your own
 
 // scss-docs-start import-stack
 // Configuration
 @import "functions";
 @import "variables";
 @import "variables-dark";
-@import 'modules/variables'; // Rewrite Bootstrap variables or set your own
 @import "maps";
 @import "mixins";
 @import "utilities";
