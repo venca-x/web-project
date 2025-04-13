@@ -1,74 +1,74 @@
-@import "mixins/banner";
+@use "mixins/banner";
 @include bsBanner("");
 
-@import 'modules/variables'; // Rewrite Bootstrap variables or set your own
+@use 'modules/variables'; // Rewrite Bootstrap variables or set your own
 
 // scss-docs-start import-stack
 // Configuration
-@import "functions";
-@import "variables";
-@import "variables-dark";
-@import "maps";
-@import "mixins";
-@import "utilities";
+@use "functions";
+@use "variables";
+@use "variables-dark";
+@use "maps";
+@use "mixins";
+@use "utilities";
 
 // Layout & components
-@import "root";
-@import "reboot";
-@import "type";
-@import "images";
-@import "containers";
-@import "grid";
-@import "tables";
-@import "forms";
-@import "buttons";
-@import "transitions";
-@import "dropdown";
-@import "button-group";
-@import "nav";
-@import "navbar";
-@import "card";
-@import "accordion";
-@import "breadcrumb";
-@import "pagination";
-@import "badge";
-@import "alert";
-@import "progress";
-@import "list-group";
-@import "close";
-@import "toasts";
-@import "modal";
-@import "tooltip";
-@import "popover";
-@import "carousel";
-@import "spinners";
-@import "offcanvas";
-@import "placeholders";
+@use "root";
+@use "reboot";
+@use "type";
+@use "images";
+@use "containers";
+@use "grid";
+@use "tables";
+@use "forms";
+@use "buttons";
+@use "transitions";
+@use "dropdown";
+@use "button-group";
+@use "nav";
+@use "navbar";
+@use "card";
+@use "accordion";
+@use "breadcrumb";
+@use "pagination";
+@use "badge";
+@use "alert";
+@use "progress";
+@use "list-group";
+@use "close";
+@use "toasts";
+@use "modal";
+@use "tooltip";
+@use "popover";
+@use "carousel";
+@use "spinners";
+@use "offcanvas";
+@use "placeholders";
 
 // Helpers
-@import "helpers";
+@use "helpers";
 
 // Utilities
-@import "utilities/api";
+@use "utilities/api";
 // scss-docs-end import-stack
 
 
 
 // Custom modules
-@import 'modules/common';
+@use 'modules/common';
 
 // Responsive modules
-@import 'modules/responsive-xs';
-@import 'modules/responsive-sm';
-@import 'modules/responsive-md';
-@import 'modules/responsive-lg';
-@import 'modules/responsive-xl';
+@use 'modules/responsive-xs';
+@use 'modules/responsive-sm';
+@use 'modules/responsive-md';
+@use 'modules/responsive-lg';
+@use 'modules/responsive-xl';
 
 //vendor
-@import '../css/tmp/fontawesome.css';
-@import '../css/tmp/fontawesome-brands.css';
-@import '../css/tmp/fontawesome-solid.css';
+@use '../css/tmp/fontawesome.css';
+@use '../css/tmp/fontawesome-brands.css';
+@use '../css/tmp/fontawesome-solid.css';
 
-//@import 'vendor/...';
-//@import 'vendor/file.css';
+//@use 'vendor/...';
+//@use 'vendor/file.css';
 
