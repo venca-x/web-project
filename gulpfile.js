@@ -96,12 +96,11 @@ gulp.task('jsAdmin', done => {
     done();
 });
 
-gulp.task('copy', done => {
-    //font awesome
-    gulp.src('node_modules/@fortawesome/fontawesome-free/webfonts/*')
-        .pipe(gulp.dest('www/webfonts'));
-
-    done();
+gulp.task('copy', function () {
+    return gulp.src('node_modules/@fortawesome/fontawesome-free/webfonts/**/*', {
+        encoding: false,
+    })
+    .pipe(gulp.dest('www/webfonts'));
 });
 
 
