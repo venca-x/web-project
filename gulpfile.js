@@ -19,17 +19,17 @@ gulp.task('shell_phpstan', shell.task('c:\\www\\phpstan-nette\\vendor\\bin\\phps
 
 gulp.task('sass', done => {
     gulp.src(['src/scss-admin/fontawesome.scss'])
-        .pipe(sass({includePaths: ['./node_modules/@fortawesome/fontawesome-free/scss']}))
+        .pipe(sass({includePaths: ['./node_modules/@fortawesome/fontawesome-free/scss']}).on('error', sass.logError))
         .pipe(concat('fontawesome.css'))
         .pipe(gulp.dest('src/css/tmp'));
 
     gulp.src(['src/scss-admin/fontawesome-brands.scss'])
-        .pipe(sass({includePaths: ['./node_modules/@fortawesome/fontawesome-free/scss']}))
+        .pipe(sass({includePaths: ['./node_modules/@fortawesome/fontawesome-free/scss']}).on('error', sass.logError))
         .pipe(concat('fontawesome-brands.css'))
         .pipe(gulp.dest('src/css/tmp'));
 
     gulp.src(['src/scss-admin/fontawesome-solid.scss'])
-        .pipe(sass({includePaths: ['./node_modules/@fortawesome/fontawesome-free/scss']}))
+        .pipe(sass({includePaths: ['./node_modules/@fortawesome/fontawesome-free/scss']}).on('error', sass.logError))
         .pipe(concat('fontawesome-solid.css'))
         .pipe(gulp.dest('src/css/tmp'));
 
@@ -41,7 +41,7 @@ gulp.task('sass', done => {
                 './node_modules/bootstrap/scss/mixins',
                 './node_modules/bootstrap/scss/utilities',
                 './node_modules/bootstrap/scss/vendor']
-        }))
+        }).on('error', sass.logError))
         .pipe(cleanCSS())
         .pipe(concat('main.min.css'))
         .pipe(gulp.dest('www/css'));
@@ -54,7 +54,7 @@ gulp.task('sass', done => {
                 './node_modules/bootstrap/scss/mixins',
                 './node_modules/bootstrap/scss/utilities',
                 './node_modules/bootstrap/scss/vendor']
-        }))
+        }).on('error', sass.logError))
         .pipe(cleanCSS())
         .pipe(concat('admin.min.css'))
         .pipe(gulp.dest('www/css'));
