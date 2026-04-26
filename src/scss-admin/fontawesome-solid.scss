@@ -1,2 +1,2 @@
-@import 'fontawesome-variables';
-@import 'solid';
+@use "variables" with ($font-path: "/webfonts");
+@use "solid" as *;

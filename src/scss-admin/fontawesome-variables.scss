@@ -1,1 +1,3 @@
-$fa-font-path           : "/webfonts";
+// FA6 mělo $fa-font-path. FA7: cesta k .woff2 se nastavuje přes
+//   @use "variables" with ($font-path: "/webfonts");
+// v souborech fontawesome.scss, fontawesome-brands.scss, fontawesome-solid.scss.

@@ -1,2 +1,2 @@
-@import 'fontawesome-variables';
-@import 'brands';
+@use "variables" with ($font-path: "/webfonts");
+@use "brands" as *;
